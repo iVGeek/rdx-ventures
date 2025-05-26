@@ -3,395 +3,268 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RDx Ventures - Real Estate & Software Engineering</title>
-
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-    integrity="sha256-sA+zdEySmMPrF3G3rZLFG0C4nKw2F0hLqx4ytbA6AAw="
-    crossorigin=""
-  />
+  <title>RDx Ventures | Dubai Real Estate & Engineering</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* Base & Dark mode */
     body {
       margin: 0;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      background: #fff;
-      color: #222;
-      line-height: 1.6;
-      transition: background-color 0.3s, color 0.3s;
+      font-family: 'Open Sans', sans-serif;
+      color: #002B45;
+      background-color: #ffffff;
+      scroll-behavior: smooth;
     }
-    body.dark {
-      background: #121212;
-      color: #eee;
-    }
-    header,
-    footer {
-      background: #003366;
-      color: #fff;
-      padding: 1rem;
-      text-align: center;
-    }
-    body.dark header,
-    body.dark footer {
-      background: #001f3f;
-    }
-
-    nav {
+    header {
+      background-color: #005792;
+      color: white;
+      padding: 1rem 2rem;
       display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      margin-bottom: 1rem;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
     }
     nav a {
-      color: #fff;
+      color: white;
+      margin-left: 1.5rem;
       text-decoration: none;
       font-weight: 600;
-      font-size: 1.1rem;
-      transition: color 0.3s;
+      transition: color 0.3s ease;
     }
-    nav a:hover,
-    nav a:focus {
-      color: #ffa500;
-      outline: none;
+    nav a:hover {
+      color: #CBA135;
     }
-
-    .container {
+    .hero {
+      background: linear-gradient(rgba(0,40,60,0.6), rgba(0,40,60,0.6)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      animation: fadeIn 2s ease-in-out;
+    }
+    .hero h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      background-color: rgba(0, 40, 60, 0.6);
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      animation: slideIn 1s ease-out;
+    }
+    .hero p {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      background-color: rgba(203, 161, 53, 0.8);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      animation: slideUp 1.5s ease-out;
+    }
+    section {
+      padding: 4rem 2rem;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 1rem 2rem;
     }
-
-    main {
-      padding-bottom: 2rem;
+    h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #005792;
     }
-
-    h1,
-    h2,
-    h3,
-    h4 {
-      margin-top: 0;
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
     }
-
-    /* Hero */
-    #hero {
-      background: url("https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1600&q=80")
-        center/cover no-repeat;
-      color: #fff;
-      text-align: center;
-      padding: 5rem 1rem 6rem;
+    .service {
+      background-color: #f2f7fb;
+      padding: 2rem;
+      border-left: 5px solid #CBA135;
+      border-radius: 12px;
       position: relative;
+      overflow: hidden;
+      transition: transform 0.3s;
     }
-    #hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.45);
-      z-index: 0;
+    .service:hover {
+      transform: translateY(-10px);
     }
-    #hero > * {
-      position: relative;
-      z-index: 1;
+    .service i {
+      font-size: 2rem;
+      color: #CBA135;
+      margin-bottom: 1rem;
+      display: block;
     }
-    #hero button {
-      background: #ffa500;
-      border: none;
-      padding: 1rem 2rem;
-      font-size: 1.2rem;
-      font-weight: 700;
-      cursor: pointer;
-      border-radius: 5px;
-      margin-top: 1rem;
-      transition: background-color 0.3s;
-    }
-    #hero button:hover,
-    #hero button:focus {
-      background: #cc8400;
-      outline: none;
-    }
-
-    /* Sections */
-    section {
-      margin: 3rem 0;
-    }
-
-    /* Services & Portfolio Grid */
-    #services,
-    #portfolio {
+    .portfolio {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
+      gap: 2rem;
+      margin-top: 2rem;
     }
-    .service,
     .project {
-      background: #f9f9f9;
-      border-radius: 8px;
-      padding: 1rem;
-      box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
-      transition: box-shadow 0.3s;
+      background-color: #f9fbfd;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
     }
-    body.dark .service,
-    body.dark .project {
-      background: #1e1e1e;
-      box-shadow: 0 2px 8px rgba(255 255 255 / 0.1);
-    }
-    .service:hover,
-    .project:hover,
-    .service:focus-within,
-    .project:focus-within {
-      box-shadow: 0 4px 10px #ffa500;
-      outline: none;
-    }
-    .service h4,
-    .project h4 {
-      margin-bottom: 0.5rem;
+    .project:hover {
+      transform: scale(1.03);
     }
     .project img {
       width: 100%;
-      height: 200px;
+      height: 180px;
       object-fit: cover;
-      border-radius: 6px;
-      margin-bottom: 0.5rem;
     }
-    .project.focused {
-      outline: 3px solid #ffa500;
+    .project .desc {
+      padding: 1rem;
     }
-
-    /* Map */
-    #map-section {
-      margin-top: 2rem;
+    .project .desc h4 {
+      margin: 0 0 0.5rem;
+      color: #005792;
+      font-size: 1.2rem;
     }
-    #map {
-      height: 300px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgb(0 0 0 / 0.15);
+    .project .desc p {
+      font-size: 0.95rem;
+      color: #444;
     }
-
-    /* Contact */
-    #contact p {
-      margin-bottom: 1rem;
-      font-size: 1.1rem;
+    footer {
+      background-color: #002B45;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 4rem;
     }
     .contact-btn {
-      background: #003366;
-      color: white;
-      text-decoration: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 5px;
-      font-weight: 600;
       display: inline-block;
-      transition: background-color 0.3s;
-    }
-    .contact-btn:hover,
-    .contact-btn:focus {
-      background: #001f3f;
-      outline: none;
-    }
-    body.dark .contact-btn {
-      background: #ffa500;
-      color: #000;
-    }
-    body.dark .contact-btn:hover,
-    body.dark .contact-btn:focus {
-      background: #cc8400;
-      color: #000;
-    }
-
-    /* Language and Dark Mode Toggles Container */
-    #toggles {
-      display: flex;
-      justify-content: flex-end;
-      gap: 1rem;
-      margin-bottom: 1rem;
-      padding: 0 1rem;
-    }
-    select,
-    button#darkModeToggle {
-      font-size: 1rem;
-      padding: 0.25rem 0.5rem;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    button#darkModeToggle {
-      background: #003366;
-      color: #fff;
+      margin-top: 2rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #005792;
+      color: white;
+      font-weight: bold;
       border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
     }
-    button#darkModeToggle:hover,
-    button#darkModeToggle:focus {
-      background: #001f3f;
-      outline: none;
+    .contact-btn:hover {
+      background-color: #CBA135;
+      color: #002B45;
     }
-    body.dark button#darkModeToggle {
-      background: #ffa500;
-      color: #000;
+    .flag {
+      width: 24px;
+      height: auto;
+      margin-left: 8px;
+      vertical-align: middle;
     }
-    body.dark button#darkModeToggle:hover,
-    body.dark button#darkModeToggle:focus {
-      background: #cc8400;
-      color: #000;
+    .footer-note {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: #ccc;
     }
-
-    /* Responsive Adjustments */
-    @media (max-width: 600px) {
-      nav {
-        gap: 0.8rem;
-        font-size: 0.9rem;
-      }
-      #hero {
-        padding: 3rem 1rem 4rem;
-      }
-      #hero h1 {
-        font-size: 1.8rem;
-      }
-      #hero p {
-        font-size: 1.1rem;
-      }
-      #hero button {
-        font-size: 1rem;
-        padding: 0.75rem 1.5rem;
-      }
-      .project img {
-        height: 150px;
-      }
-      #map {
-        height: 250px;
-      }
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    @keyframes slideIn {
+      0% { transform: translateX(-50px); opacity: 0; }
+      100% { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes slideUp {
+      0% { transform: translateY(50px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
     }
   </style>
 </head>
 <body>
   <header>
     <h1>RDx Ventures</h1>
-    <nav aria-label="Primary navigation">
-      <a href="#about" data-key="navAbout">About</a>
-      <a href="#services" data-key="navServices">Services</a>
-      <a href="#portfolio" data-key="navPortfolio">Portfolio</a>
-      <a href="#contact" data-key="navContact">Contact</a>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#contact">Contact</a>
     </nav>
   </header>
 
-  <div id="toggles" aria-label="Language and display mode controls">
-    <label for="languageSwitcher" class="sr-only">Select Language</label>
-    <select id="languageSwitcher" aria-live="polite" aria-label="Language selection">
-      <option value="en">English</option>
-      <option value="ar">العربية</option>
-      <option value="tr">Türkçe</option>
-      <option value="ko">한국어</option>
-    </select>
-
-    <button id="darkModeToggle" aria-pressed="false" aria-label="Toggle dark mode">
-      Dark Mode
-    </button>
+  <div class="hero">
+    <h2>Elevating Dubai's Skyline</h2>
+    <p>Engineering meets elegance in modern real estate</p>
+    <a href="#contact" class="contact-btn">Get in Touch</a>
   </div>
 
-  <main class="container">
-    <section id="hero" role="banner" aria-label="Hero section">
-      <h1 data-key="heroTitle">Elevating Dubai's Skyline</h1>
-      <p data-key="heroSubtitle">Engineering meets elegance in modern real estate</p>
-      <button aria-label="Get in touch" data-key="heroButton">Get in Touch</button>
-    </section>
+  <section id="about">
+    <h3>About RDx Ventures</h3>
+    <p>
+      Based in Dubai, RDx Ventures redefines real estate by fusing high-end construction with the precision of software engineering.
+      Our mission is to build iconic spaces with smart technologies and timeless design. We proudly operate in key global locations including <strong>Dubai <img class="flag" src="https://flagcdn.com/w40/ae.png" alt="UAE flag" />, Turkey <img class="flag" src="https://flagcdn.com/w40/tr.png" alt="Turkey flag" />, South Korea <img class="flag" src="https://flagcdn.com/w40/kr.png" alt="Korea flag" />,</strong> and <strong>Nairobi <img class="flag" src="https://flagcdn.com/w40/ke.png" alt="Kenya flag" /></strong>, delivering excellence across borders.
+    </p>
+  </section>
 
-    <section id="about" tabindex="-1" aria-labelledby="aboutTitle">
-      <h2 id="aboutTitle" data-key="aboutTitle">About RDx Ventures</h2>
-      <p data-key="aboutText">
-        Based in Dubai, RDx Ventures redefines real estate by fusing high-end construction with the precision of software engineering. Our mission is to build iconic spaces with smart technologies and timeless design. We proudly operate in key global locations including Dubai, Turkey, South Korea.
-      </p>
-    </section>
-
-    <section id="services" tabindex="-1" aria-labelledby="servicesTitle">
-      <h2 id="servicesTitle" data-key="servicesTitle">Our Services</h2>
-      <article class="service" tabindex="0">
-        <h4 data-key="service1Title">Construction Management</h4>
-        <p data-key="service1Desc">Delivering large-scale projects with unmatched quality and timelines.</p>
-      </article>
-      <article class="service" tabindex="0">
-        <h4 data-key="service2Title">Software Solutions</h4>
-        <p data-key="service2Desc">Custom engineering software tailored to streamline your operations.</p>
-      </article>
-      <article class="service" tabindex="0">
-        <h4 data-key="service3Title">Sustainability Consulting</h4>
-        <p data-key="service3Desc">Eco-friendly designs to reduce carbon footprint and costs.</p>
-      </article>
-    </section>
-
-    <section id="portfolio" tabindex="-1" aria-labelledby="portfolioTitle">
-      <h2 id="portfolioTitle" data-key="portfolioTitle">Portfolio Highlights</h2>
-      <div role="list" aria-label="Portfolio projects" style="display:grid; gap:1rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
-        <article
-          class="project"
-          role="listitem"
-          tabindex="0"
-          aria-label="Skyline Tower project image and description"
-        >
-          <img
-            src="https://images.unsplash.com/photo-1560185127-0f9e22db4f66?auto=format&fit=crop&w=600&q=80"
-            alt="Skyline Tower, iconic skyscraper in Dubai"
-            loading="lazy"
-            width="600"
-            height="400"
-          />
-          <div class="desc">
-            <h4 data-key="project1Title">Skyline Tower</h4>
-            <p data-key="project1Desc">Iconic skyscraper in downtown Dubai blending modern aesthetics and cutting-edge tech.</p>
-          </div>
-        </article>
-        <article
-          class="project"
-          role="listitem"
-          tabindex="0"
-          aria-label="Marina Bay Residences project image and description"
-        >
-          <img
-            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
-            alt="Luxury waterfront apartment building at sunset"
-            loading="lazy"
-            width="600"
-            height="400"
-          />
-          <div class="desc">
-            <h4 data-key="project2Title">Marina Bay Residences</h4>
-            <p data-key="project2Desc">Luxury waterfront apartments offering unparalleled views and amenities.</p>
-          </div>
-        </article>
-        <article
-          class="project"
-          role="listitem"
-          tabindex="0"
-          aria-label="Modern Commercial Complex project image and description"
-        >
-          <img
-            src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80"
-            alt="Modern commercial building with glass exterior"
-            loading="lazy"
-            width="600"
-            height="400"
-          />
-          <div class="desc">
-            <h4 data-key="project3Title">Modern Commercial Complex</h4>
-            <p data-key="project3Desc">State-of-the-art commercial space built with sustainable design principles.</p>
-          </div>
-        </article>
+  <section id="services">
+    <h3>Our Services</h3>
+    <div class="services">
+      <div class="service">
+        <i class="fas fa-building"></i>
+        <h4>Real Estate Development</h4>
+        <p>Luxury residential and commercial projects engineered for excellence.</p>
       </div>
-    </section>
+      <div class="service">
+        <i class="fas fa-hard-hat"></i>
+        <h4>Smart Construction</h4>
+        <p>Combining civil engineering with cutting-edge automation and BIM.</p>
+      </div>
+      <div class="service">
+        <i class="fas fa-code"></i>
+        <h4>Software-Integrated Operations</h4>
+        <p>AI-driven tools for property analytics, monitoring, and management.</p>
+      </div>
+    </div>
+  </section>
 
-    <section id="map-section" tabindex="-1" aria-labelledby="mapTitle">
-      <h3 id="mapTitle" data-key="mapTitle">Office Locations</h3>
-      <div id="map" role="region" aria-label="Map showing office locations"></div>
-    </section>
+  <section id="portfolio">
+    <h3>Portfolio Highlights</h3>
+    <div class="portfolio">
+      <div class="project">
+        <img src="https://images.unsplash.com/photo-1581093588401-8f67c0b6b480?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80" alt="Luxury Tower">
+        <div class="desc">
+          <h4>Skyline Lux Tower</h4>
+          <p>A smart skyscraper in downtown Dubai with AI-powered energy systems.</p>
+        </div>
+      </div>
+      <div class="project">
+        <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80" alt="Eco Villas">
+        <div class="desc">
+          <h4>Eco Haven Villas</h4>
+          <p>Sustainable residential community with integrated solar and smart home tech.</p>
+        </div>
+      </div>
+      <div class="project">
+        <img src="https://images.unsplash.com/photo-1585241741188-73e00b8b14cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80" alt="Marina Hub">
+        <div class="desc">
+          <h4>Marina Innovation Hub</h4>
+          <p>Mixed-use development merging real estate with co-working and R&D spaces.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <section id="contact" tabindex="-1" aria-label="Contact section">
-      <h3 data-key="contactTitle">Contact Us</h3>
-      <p data-key="contactText">Ready to turn your vision into reality? Get in touch today.</p>
-      <a href="mailto:contact@rdxventures.com" class="contact-btn" aria-label="Email RDx Ventures">Email Us</a>
-    </section>
-  </main>
+  <section id="contact">
+    <h3>Contact Us</h3>
+    <p>Email: <a href="mailto:contact@rdxventures.ae">contact@rdxventures.ae</a> | Phone: <a href="tel:+97140000000">+971-4-0000000</a></p>
+    <p>Global Offices: Dubai <img class="flag" src="https://flagcdn.com/w40/ae.png" alt="UAE flag" />, Turkey <img class="flag" src="https://flagcdn.com/w40/tr.png" alt="Turkey flag" />, South Korea <img class="flag" src="https://flagcdn.com/w40/kr.png" alt="Korea flag" />, Nairobi <img class="flag" src="https://flagcdn.com/w40/ke.png" alt="Kenya flag" /></p>
+    <p><strong>Website:</strong> <a href="https://rdxventures.ae" target="_blank" style="color:#CBA135; text-decoration:underline;">rdxventures.ae</a></p>
+  </section>
 
   <footer>
-    <p>© 2025 RDx Ventures. All rights reserved.</p>
-    <p style="font-size: 0.8rem; color: #aaa; margin-top: 0.5rem;">
-      <!-- CMS Integration Suggestions:
-      Consider integrating headless CMS solutions such as Strapi (https://strapi.io/) or Sanity (https://www.sanity.io/) for flexible content management and easy multilingual
+    <p>&copy; 2025 RDx Ventures. All rights reserved.</p>
+    <p class="footer-note">Made with precision and vision in Dubai, connecting software and skylines worldwide.</p>
+  </footer>
+</body>
+</html>
