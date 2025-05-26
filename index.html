@@ -1,180 +1,263 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RDx Ventures | Dubai Real Estate & Proptech</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RDx Ventures | Dubai Real Estate & Engineering</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      color: #002B45;
+      background-color: #ffffff;
+      scroll-behavior: smooth;
+    }
+    header {
+      background-color: #005792;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+    }
+    nav a {
+      color: white;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #CBA135;
+    }
+    .hero {
+      background: linear-gradient(rgba(0,40,60,0.6), rgba(0,40,60,0.6)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+      animation: fadeIn 2s ease-in-out;
+    }
+    .hero h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      background-color: rgba(0, 40, 60, 0.6);
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      animation: slideIn 1s ease-out;
+    }
+    .hero p {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      background-color: rgba(203, 161, 53, 0.8);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      animation: slideUp 1.5s ease-out;
+    }
+    section {
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: #005792;
+    }
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .service {
+      background-color: #f2f7fb;
+      padding: 2rem;
+      border-left: 5px solid #CBA135;
+      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s;
+    }
+    .service:hover {
+      transform: translateY(-10px);
+    }
+    .service i {
+      font-size: 2rem;
+      color: #CBA135;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .portfolio {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .project {
+      background-color: #f9fbfd;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+    }
+    .project:hover {
+      transform: scale(1.03);
+    }
+    .project img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .project .desc {
+      padding: 1rem;
+    }
+    .project .desc h4 {
+      margin: 0 0 0.5rem;
+      color: #005792;
+      font-size: 1.2rem;
+    }
+    .project .desc p {
+      font-size: 0.95rem;
+      color: #444;
+    }
+    footer {
+      background-color: #002B45;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 4rem;
+    }
+    .contact-btn {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #005792;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+    .contact-btn:hover {
+      background-color: #CBA135;
+      color: #002B45;
+    }
+    .flag {
+      width: 24px;
+      height: auto;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+    @keyframes slideIn {
+      0% { transform: translateX(-50px); opacity: 0; }
+      100% { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes slideUp {
+      0% { transform: translateY(50px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+  </style>
 </head>
 <body>
-  <!-- Preloader -->
-  <div class="preloader">
-    <div class="loader"></div>
+  <header>
+    <h1>RDx Ventures</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h2>Elevating Dubai's Skyline</h2>
+    <p>Engineering meets elegance in modern real estate</p>
+    <a href="#contact" class="contact-btn">Get in Touch</a>
   </div>
 
-  <!-- Custom Cursor -->
-  <div class="cursor"></div>
-
-  <!-- Navigation -->
-  <nav class="navbar">
-    <div class="container">
-      <a href="#" class="logo">RDx <span>Ventures</span></a>
-      <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- Hero Section with Video -->
-  <section id="home" class="hero">
-    <div class="hero-video">
-      <video autoplay muted loop poster="images/hero-bg.jpg">
-        <source src="videos/dubai-skyline.mp4" type="video/mp4">
-        <!-- Fallback image -->
-        <img src="images/hero-bg.jpg" alt="Dubai Skyline">
-      </video>
-    </div>
-    <div class="hero-content">
-      <h1>Building Tomorrow <span class="gradient-gold">with Innovation</span></h1>
-      <p>Dubai’s Premier Real Estate & Construction Firm Powered by Cutting-Edge Software Engineering</p>
-      <a href="#projects" class="btn-gold pulse">Explore Our Projects</a>
-    </div>
+  <section id="about">
+    <h3>About RDx Ventures</h3>
+    <p>
+      Based in Dubai, RDx Ventures redefines real estate by fusing high-end construction with the precision of software engineering.
+      Our mission is to build iconic spaces with smart technologies and timeless design. We proudly operate in key global locations including <strong>Dubai <img class="flag" src="https://flagcdn.com/w40/ae.png" alt="UAE flag" />, Turkey <img class="flag" src="https://flagcdn.com/w40/tr.png" alt="Turkey flag" />, South Korea <img class="flag" src="https://flagcdn.com/w40/kr.png" alt="Korea flag" />,</strong> and <strong>Nairobi <img class="flag" src="https://flagcdn.com/w40/ke.png" alt="Kenya flag" /></strong>, delivering excellence across borders.
+    </p>
   </section>
 
-  <!-- About Section -->
-  <section id="about" class="about">
-    <div class="container">
-      <div class="about-img">
-        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZHViYWklMjBza3lsaW5lfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60" alt="Dubai Skyline" loading="lazy">
+  <section id="services">
+    <h3>Our Services</h3>
+    <div class="services">
+      <div class="service">
+        <i class="fas fa-building"></i>
+        <h4>Real Estate Development</h4>
+        <p>Luxury residential and commercial projects engineered for excellence.</p>
       </div>
-      <div class="about-text">
-        <h2>About <span>RDx Ventures</span></h2>
-        <p>We merge world-class real estate development with proprietary proptech solutions to redefine urban living in Dubai.</p>
-        <ul class="gold-list">
-          <li>AI-Driven Construction Analytics</li>
-          <li>Smart Property Management Systems</li>
-          <li>Sustainable Urban Development</li>
-        </ul>
+      <div class="service">
+        <i class="fas fa-hard-hat"></i>
+        <h4>Smart Construction</h4>
+        <p>Combining civil engineering with cutting-edge automation and BIM.</p>
+      </div>
+      <div class="service">
+        <i class="fas fa-code"></i>
+        <h4>Software-Integrated Operations</h4>
+        <p>AI-driven tools for property analytics, monitoring, and management.</p>
       </div>
     </div>
   </section>
 
-  <!-- Services Section -->
-  <section id="services" class="services">
-    <div class="container">
-      <h2>Our <span>Services</span></h2>
-      <div class="services-grid">
-        <div class="service-card">
-          <i class="fas fa-building fa-3x"></i>
-          <h3>Real Estate Development</h3>
-          <p>Luxury residential & commercial projects in Dubai.</p>
+  <section id="portfolio">
+    <h3>Portfolio Highlights</h3>
+    <div class="portfolio">
+      <div class="project">
+        <img src="https://images.unsplash.com/photo-1581093588401-8f67c0b6b480?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80" alt="Luxury Tower">
+        <div class="desc">
+          <h4>Skyline Lux Tower</h4>
+          <p>A smart skyscraper in downtown Dubai with AI-powered energy systems.</p>
         </div>
-        <div class="service-card">
-          <i class="fas fa-robot fa-3x"></i>
-          <h3>Construction Innovation</h3>
-          <p>AI-powered project management & modular construction.</p>
+      </div>
+      <div class="project">
+        <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80" alt="Eco Villas">
+        <div class="desc">
+          <h4>Eco Haven Villas</h4>
+          <p>Sustainable residential community with integrated solar and smart home tech.</p>
         </div>
-        <div class="service-card">
-          <i class="fas fa-microchip fa-3x"></i>
-          <h3>Proptech Solutions</h3>
-          <p>Custom software for real estate operations.</p>
+      </div>
+      <div class="project">
+        <img src="https://images.unsplash.com/photo-1585241741188-73e00b8b14cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80" alt="Marina Hub">
+        <div class="desc">
+          <h4>Marina Innovation Hub</h4>
+          <p>Mixed-use development merging real estate with co-working and R&D spaces.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Projects Section -->
-  <section id="projects" class="projects">
-    <div class="container">
-      <h2>Featured <span>Projects</span></h2>
-      <div class="projects-gallery">
-        <div class="project-item">
-          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bHV4dXJ5JTIwaG9tZXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60" alt="Luxury Villa" loading="lazy">
-          <div class="project-overlay">
-            <h3>The Nebula Tower</h3>
-            <p>AI-optimized high-rise in Downtown Dubai</p>
-          </div>
-        </div>
-        <div class="project-item">
-          <img src="https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bW9kZXJuJTIwdmlsbGF8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60" alt="Modern Villa" loading="lazy">
-          <div class="project-overlay">
-            <h3>Smart Oasis Residence</h3>
-            <p>IoT-enabled luxury villas</p>
-          </div>
-        </div>
-      </div>
-    </div>
+  <section id="contact">
+    <h3>Contact Us</h3>
+    <p>Email: contact@rdxventures.ae | Phone: +971-4-XXXXXXX</p>
+    <p>Global Offices: Dubai <img class="flag" src="https://flagcdn.com/w40/ae.png" alt="UAE flag" />, Turkey <img class="flag" src="https://flagcdn.com/w40/tr.png" alt="Turkey flag" />, South Korea <img class="flag" src="https://flagcdn.com/w40/kr.png" alt="Korea flag" />, Nairobi <img class="flag" src="https://flagcdn.com/w40/ke.png" alt="Kenya flag" /></p>
   </section>
 
-  <!-- Team Section -->
-  <section class="team">
-    <div class="container">
-      <h2>Our <span>Experts</span></h2>
-      <div class="team-grid">
-        <div class="team-card">
-          <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmVhbCUyMGVzdGF0ZSUyMGFnZW50fGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60" alt="Real Estate Agent" loading="lazy">
-          <h3>Sarah Johnson</h3>
-          <p>Head of Construction</p>
-        </div>
-        <div class="team-card">
-          <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cmVhbCUyMGVzdGF0ZSUyMGFnZW50fGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60" alt="Real Estate Agent" loading="lazy">
-          <h3>Ahmed Al-Maktoum</h3>
-          <p>Proptech Director</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Lightbox Modal -->
-  <div class="lightbox">
-    <span class="close">&times;</span>
-    <img class="lightbox-img" src="" alt="">
-  </div>
-
-  <!-- Contact Section -->
-  <section id="contact" class="contact">
-    <div class="container">
-      <h2>Get in <span>Touch</span></h2>
-      <div class="contact-flex">
-        <div class="contact-info">
-          <h3>Dubai Office</h3>
-          <p><i class="fas fa-map-marker-alt"></i> Business Bay, Dubai, UAE</p>
-          <p><i class="fas fa-phone"></i> +971 4 123 4567</p>
-          <p><i class="fas fa-envelope"></i> info@rdxventures.ae</p>
-        </div>
-        <form class="contact-form">
-          <input type="text" placeholder="Name" required>
-          <input type="email" placeholder="Email" required>
-          <textarea placeholder="Message" required></textarea>
-          <button type="submit" class="btn-gold">Send Message</button>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
   <footer>
-    <div class="container">
-      <div class="footer-logo">RDx <span>Ventures</span></div>
-      <div class="social-links">
-        <a href="#"><i class="fab fa-linkedin"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-      </div>
-      <p>&copy; 2024 RDx Ventures. All rights reserved.</p>
-    </div>
+    <p>&copy; 2025 RDx Ventures. All rights reserved.</p>
   </footer>
-
-  <!-- Scripts -->
-  <script src="js/scrollreveal.min.js"></script>
-  <script src="js/app.js"></script>
 </body>
 </html>
