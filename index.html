@@ -11,6 +11,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+  <!-- Preloader -->
+  <div class="preloader">
+    <div class="loader"></div>
+  </div>
+
+  <!-- Custom Cursor -->
+  <div class="cursor"></div>
+
   <!-- Navigation -->
   <nav class="navbar">
     <div class="container">
@@ -27,10 +35,17 @@
 
   <!-- Hero Section -->
   <section id="home" class="hero">
+    <div class="hero-video">
+      <video autoplay muted loop>
+        <source src="images/hero-video.mp4" type="video/mp4">
+        <!-- Fallback image if video doesn't load -->
+        <img src="images/hero-bg.jpg" alt="Dubai Skyline">
+      </video>
+    </div>
     <div class="hero-content">
-      <h1>Building Tomorrow with Innovation</h1>
+      <h1>Building Tomorrow <span class="gradient-gold">with Innovation</span></h1>
       <p>Dubai’s Premier Real Estate & Construction Firm Powered by Cutting-Edge Software Engineering</p>
-      <a href="#projects" class="btn-gold">Explore Our Projects</a>
+      <a href="#projects" class="btn-gold pulse">Explore Our Projects</a>
     </div>
   </section>
 
@@ -99,6 +114,12 @@
     </div>
   </section>
 
+  <!-- Lightbox Modal -->
+  <div class="lightbox">
+    <span class="close">&times;</span>
+    <img class="lightbox-img" src="" alt="">
+  </div>
+
   <!-- Contact Section -->
   <section id="contact" class="contact">
     <div class="container">
@@ -132,5 +153,9 @@
       <p>&copy; 2024 RDx Ventures. All rights reserved.</p>
     </div>
   </footer>
+
+  <!-- Scripts -->
+  <script src="js/scrollreveal.min.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
