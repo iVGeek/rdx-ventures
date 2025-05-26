@@ -1,21 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>RDx Ventures | Dubai Real Estate & Engineering</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
+    /* CSS Variables for Light & Dark mode */
+    :root {
+      --color-bg: #ffffff;
+      --color-text: #002b45;
+      --color-primary: #005792;
+      --color-accent: #cba135;
+      --color-service-bg: #f2f7fb;
+      --color-project-bg: #f9fbfd;
+      --color-footer-bg: #002b45;
+      --color-footer-text: #ffffff;
+    }
+    [data-theme="dark"] {
+      --color-bg: #001e33;
+      --color-text: #c8d6e5;
+      --color-primary: #4a90e2;
+      --color-accent: #f5b700;
+      --color-service-bg: #09304e;
+      --color-project-bg: #0c305a;
+      --color-footer-bg: #001022;
+      --color-footer-text: #c8d6e5;
+    }
+
     body {
       margin: 0;
       font-family: 'Open Sans', sans-serif;
-      color: #002B45;
-      background-color: #ffffff;
+      color: var(--color-text);
+      background-color: var(--color-bg);
       scroll-behavior: smooth;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
     header {
-      background-color: #005792;
+      background-color: var(--color-primary);
       color: white;
       padding: 1rem 2rem;
       display: flex;
@@ -24,7 +47,7 @@
       position: sticky;
       top: 0;
       z-index: 999;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
     header h1 {
       font-family: 'Playfair Display', serif;
@@ -38,10 +61,12 @@
       transition: color 0.3s ease;
     }
     nav a:hover {
-      color: #CBA135;
+      color: var(--color-accent);
     }
     .hero {
-      background: linear-gradient(rgba(0,40,60,0.6), rgba(0,40,60,0.6)), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+      background: linear-gradient(rgba(0, 40, 60, 0.6), rgba(0, 40, 60, 0.6)),
+        url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80')
+          no-repeat center center/cover;
       height: 90vh;
       display: flex;
       flex-direction: column;
@@ -58,6 +83,7 @@
       padding: 1rem 2rem;
       border-radius: 12px;
       animation: slideIn 1s ease-out;
+      max-width: 90vw;
     }
     .hero p {
       margin-top: 1rem;
@@ -66,6 +92,7 @@
       padding: 0.5rem 1rem;
       border-radius: 8px;
       animation: slideUp 1.5s ease-out;
+      max-width: 90vw;
     }
     section {
       padding: 4rem 2rem;
@@ -75,7 +102,8 @@
     h3 {
       font-family: 'Playfair Display', serif;
       font-size: 2rem;
-      color: #005792;
+      color: var(--color-primary);
+      margin-bottom: 1.5rem;
     }
     .services {
       display: grid;
@@ -84,9 +112,9 @@
       margin-top: 2rem;
     }
     .service {
-      background-color: #f2f7fb;
+      background-color: var(--color-service-bg);
       padding: 2rem;
-      border-left: 5px solid #CBA135;
+      border-left: 5px solid var(--color-accent);
       border-radius: 12px;
       position: relative;
       overflow: hidden;
@@ -97,7 +125,7 @@
     }
     .service i {
       font-size: 2rem;
-      color: #CBA135;
+      color: var(--color-accent);
       margin-bottom: 1rem;
       display: block;
     }
@@ -108,10 +136,10 @@
       margin-top: 2rem;
     }
     .project {
-      background-color: #f9fbfd;
+      background-color: var(--color-project-bg);
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
       transition: transform 0.3s ease;
     }
     .project:hover {
@@ -127,7 +155,7 @@
     }
     .project .desc h4 {
       margin: 0 0 0.5rem;
-      color: #005792;
+      color: var(--color-primary);
       font-size: 1.2rem;
     }
     .project .desc p {
@@ -135,8 +163,8 @@
       color: #444;
     }
     footer {
-      background-color: #002B45;
-      color: white;
+      background-color: var(--color-footer-bg);
+      color: var(--color-footer-text);
       text-align: center;
       padding: 2rem 1rem;
       margin-top: 4rem;
@@ -145,17 +173,18 @@
       display: inline-block;
       margin-top: 2rem;
       padding: 0.75rem 1.5rem;
-      background-color: #005792;
+      background-color: var(--color-primary);
       color: white;
       font-weight: bold;
       border: none;
       border-radius: 8px;
       text-decoration: none;
       transition: background-color 0.3s ease;
+      cursor: pointer;
     }
     .contact-btn:hover {
-      background-color: #CBA135;
-      color: #002B45;
+      background-color: var(--color-accent);
+      color: var(--color-bg);
     }
     .flag {
       width: 24px;
@@ -163,6 +192,59 @@
       margin-left: 8px;
       vertical-align: middle;
     }
+    /* Language selector */
+    #language-select {
+      margin-left: 1rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    /* Dark mode toggle */
+    #dark-mode-toggle {
+      margin-left: 1rem;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: white;
+      background: transparent;
+      border: none;
+      outline: none;
+      transition: color 0.3s ease;
+    }
+    #dark-mode-toggle:hover {
+      color: var(--color-accent);
+    }
+    /* Responsive nav for mobile */
+    @media (max-width: 768px) {
+      header {
+        flex-wrap: wrap;
+      }
+      nav {
+        width: 100%;
+        margin-top: 0.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      nav a {
+        margin: 0.5rem 1rem;
+      }
+      #language-select {
+        margin-left: 0;
+        margin-top: 0.5rem;
+      }
+      .hero h2 {
+        font-size: 2.2rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+      section {
+        padding: 3rem 1rem;
+      }
+    }
+    /* Animations */
     @keyframes fadeIn {
       0% { opacity: 0; }
       100% { opacity: 1; }
@@ -175,89 +257,329 @@
       0% { transform: translateY(50px); opacity: 0; }
       100% { transform: translateY(0); opacity: 1; }
     }
+
+    /* Contact Form Styles */
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    input, textarea {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      resize: vertical;
+    }
+    input:focus, textarea:focus {
+      border-color: var(--color-primary);
+      outline: none;
+    }
+    button.submit-btn {
+      background-color: var(--color-primary);
+      color: white;
+      border: none;
+      padding: 0.75rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button.submit-btn:hover {
+      background-color: var(--color-accent);
+      color: var(--color-bg);
+    }
+
+    /* Map container */
+    #map {
+      width: 100%;
+      height: 350px;
+      border-radius: 12px;
+      margin-top: 1rem;
+    }
   </style>
 </head>
 <body>
   <header>
     <h1>RDx Ventures</h1>
     <nav>
-      <a href="#about">About</a>
-      <a href="#services">Services</a>
-      <a href="#portfolio">Portfolio</a>
-      <a href="#contact">Contact</a>
+      <a href="#about" data-i18n="navAbout">About</a>
+      <a href="#services" data-i18n="navServices">Services</a>
+      <a href="#portfolio" data-i18n="navPortfolio">Portfolio</a>
+      <a href="#contact" data-i18n="navContact">Contact</a>
+      <!-- Language selector -->
+      <select id="language-select" aria-label="Select Language" title="Select Language">
+        <option value="en" selected>English 🇬🇧</option>
+        <option value="ar">العربية 🇸🇦</option>
+        <option value="tr">Türkçe 🇹🇷</option>
+        <option value="ko">한국어 🇰🇷</option>
+      </select>
+      <!-- Dark mode toggle -->
+      <button id="dark-mode-toggle" aria-label="Toggle Dark Mode" title="Toggle Dark Mode" aria-pressed="false">
+        <i class="fa-regular fa-moon"></i>
+      </button>
     </nav>
   </header>
 
-  <div class="hero">
-    <h2>Elevating Dubai's Skyline</h2>
-    <p>Engineering meets elegance in modern real estate</p>
-    <a href="#contact" class="contact-btn">Get in Touch</a>
-  </div>
+  <section class="hero" aria-label="Hero Section">
+    <h2 data-i18n="heroTitle">Innovating Real Estate & Engineering in Dubai and Beyond</h2>
+    <p data-i18n="heroSubtitle">Building your vision with technology, precision, and passion.</p>
+  </section>
 
-  <section id="about">
-    <h3>About RDx Ventures</h3>
-    <p>
-      Based in Dubai, RDx Ventures redefines real estate by fusing high-end construction with the precision of software engineering.
-      Our mission is to build iconic spaces with smart technologies and timeless design. We proudly operate in key global locations including <strong>Dubai <img class="flag" src="https://flagcdn.com/w40/ae.png" alt="UAE flag" />, Turkey <img class="flag" src="https://flagcdn.com/w40/tr.png" alt="Turkey flag" />, South Korea <img class="flag" src="https://flagcdn.com/w40/kr.png" alt="Korea flag" />,</strong> and <strong>Nairobi <img class="flag" src="https://flagcdn.com/w40/ke.png" alt="Kenya flag" /></strong>, delivering excellence across borders.
+  <section id="about" aria-label="About RDx Ventures">
+    <h3 data-i18n="aboutTitle">About Us</h3>
+    <p data-i18n="aboutText">
+      RDx Ventures is a Dubai-based company specializing in real estate construction, operations, and technology integration.
+      Our expert team leverages advanced software engineering to deliver innovative, sustainable, and efficient solutions.
     </p>
   </section>
 
-  <section id="services">
-    <h3>Our Services</h3>
+  <section id="services" aria-label="Services Offered">
+    <h3 data-i18n="servicesTitle">Our Services</h3>
     <div class="services">
-      <div class="service">
-        <i class="fas fa-building"></i>
-        <h4>Real Estate Development</h4>
-        <p>Luxury residential and commercial projects engineered for excellence.</p>
-      </div>
-      <div class="service">
-        <i class="fas fa-hard-hat"></i>
-        <h4>Smart Construction</h4>
-        <p>Combining civil engineering with cutting-edge automation and BIM.</p>
-      </div>
-      <div class="service">
-        <i class="fas fa-code"></i>
-        <h4>Software-Integrated Operations</h4>
-        <p>AI-driven tools for property analytics, monitoring, and management.</p>
-      </div>
+      <article class="service" aria-labelledby="service1-title">
+        <i class="fa-solid fa-building"></i>
+        <h4 id="service1-title" data-i18n="service1Title">Real Estate Development</h4>
+        <p data-i18n="service1Desc">From planning to execution, we manage large-scale real estate projects with precision and efficiency.</p>
+      </article>
+      <article class="service" aria-labelledby="service2-title">
+        <i class="fa-solid fa-cogs"></i>
+        <h4 id="service2-title" data-i18n="service2Title">Engineering Solutions</h4>
+        <p data-i18n="service2Desc">Custom technology-driven engineering services to optimize construction and operations.</p>
+      </article>
+      <article class="service" aria-labelledby="service3-title">
+        <i class="fa-solid fa-code"></i>
+        <h4 id="service3-title" data-i18n="service3Title">Software Integration</h4>
+        <p data-i18n="service3Desc">Seamless integration of software platforms to improve workflow and data management.</p>
+      </article>
     </div>
   </section>
 
-  <section id="portfolio">
-    <h3>Portfolio Highlights</h3>
-    <div class="portfolio">
+  <section id="portfolio" aria-label="Portfolio Showcase">
+    <h3 data-i18n="portfolioTitle">Portfolio Highlights</h3>
+    <div class="portfolio" id="portfolio-list">
+      <!-- Projects will be dynamically loaded from CMS or static fallback -->
       <div class="project">
-        <img src="https://images.unsplash.com/photo-1581093588401-8f67c0b6b480?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80" alt="Luxury Tower">
+        <img src="https://images.unsplash.com/photo-1560184897-fd179f74b8a4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Downtown Dubai Project" />
         <div class="desc">
-          <h4>Skyline Lux Tower</h4>
-          <p>A smart skyscraper in downtown Dubai with AI-powered energy systems.</p>
+          <h4 data-i18n="proj1Title">Downtown Dubai Tower</h4>
+          <p data-i18n="proj1Desc">High-rise residential tower combining luxury living with eco-friendly technologies.</p>
         </div>
       </div>
       <div class="project">
-        <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80" alt="Eco Villas">
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Smart Building Automation" />
         <div class="desc">
-          <h4>Eco Haven Villas</h4>
-          <p>Sustainable residential community with integrated solar and smart home tech.</p>
-        </div>
-      </div>
-      <div class="project">
-        <img src="https://images.unsplash.com/photo-1585241741188-73e00b8b14cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=900&q=80" alt="Marina Hub">
-        <div class="desc">
-          <h4>Marina Innovation Hub</h4>
-          <p>Mixed-use development merging real estate with co-working and R&D spaces.</p>
+          <h4 data-i18n="proj2Title">Smart Building Automation</h4>
+          <p data-i18n="proj2Desc">Integrated automation systems for efficient building management and energy savings.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="contact">
-    <h3>Contact Us</h3>
-    <p>Email: contact@rdxventures.ae | Phone: +971-4-XXXXXXX</p>
-    <p>Global Offices: Dubai <img class="flag" src="https://flagcdn.com/w40/ae.png" alt="UAE flag" />, Turkey <img class="flag" src="https://flagcdn.com/w40/tr.png" alt="Turkey flag" />, South Korea <img class="flag" src="https://flagcdn.com/w40/kr.png" alt="Korea flag" />, Nairobi <img class="flag" src="https://flagcdn.com/w40/ke.png" alt="Kenya flag" /></p>
+  <section id="map-section" aria-label="Office Locations">
+    <h3 data-i18n="mapTitle">Our Global Offices</h3>
+    <div id="map" role="region" aria-label="Map showing office locations"></div>
+  </section>
+
+  <section id="contact" aria-label="Contact RDx Ventures">
+    <h3 data-i18n="contactTitle">Contact Us</h3>
+    <form id="contact-form" aria-label="Contact form">
+      <input type="text" id="name" name="name" placeholder="Name" required aria-required="true" />
+      <input type="email" id="email" name="email" placeholder="Email" required aria-required="true" />
+      <textarea id="message" name="message" rows="5" placeholder="Message" required aria-required="true"></textarea>
+      <button type="submit" class="submit-btn" data-i18n="sendBtn">Send Message</button>
+    </form>
   </section>
 
   <footer>
-    <p>&copy; 2025 RDx Ventures. All rights reserved.</p>
+    &copy; 2025 RDx Ventures. All rights reserved.
   </footer>
+
+  <script>
+    // Multilingual support JSON
+    const translations = {
+      en: {
+        navAbout: "About",
+        navServices: "Services",
+        navPortfolio: "Portfolio",
+        navContact: "Contact",
+        heroTitle: "Innovating Real Estate & Engineering in Dubai and Beyond",
+        heroSubtitle: "Building your vision with technology, precision, and passion.",
+        aboutTitle: "About Us",
+        aboutText:
+          "RDx Ventures is a Dubai-based company specializing in real estate construction, operations, and technology integration. Our expert team leverages advanced software engineering to deliver innovative, sustainable, and efficient solutions.",
+        servicesTitle: "Our Services",
+        service1Title: "Real Estate Development",
+        service1Desc: "From planning to execution, we manage large-scale real estate projects with precision and efficiency.",
+        service2Title: "Engineering Solutions",
+        service2Desc: "Custom technology-driven engineering services to optimize construction and operations.",
+        service3Title: "Software Integration",
+        service3Desc: "Seamless integration of software platforms to improve workflow and data management.",
+        portfolioTitle: "Portfolio Highlights",
+        proj1Title: "Downtown Dubai Tower",
+        proj1Desc: "High-rise residential tower combining luxury living with eco-friendly technologies.",
+        proj2Title: "Smart Building Automation",
+        proj2Desc: "Integrated automation systems for efficient building management and energy savings.",
+        mapTitle: "Our Global Offices",
+        contactTitle: "Contact Us",
+        sendBtn: "Send Message"
+      },
+      ar: {
+        navAbout: "من نحن",
+        navServices: "خدماتنا",
+        navPortfolio: "أعمالنا",
+        navContact: "اتصل بنا",
+        heroTitle: "الابتكار في العقارات والهندسة في دبي وخارجها",
+        heroSubtitle: "نبني رؤيتك بالتكنولوجيا والدقة والشغف.",
+        aboutTitle: "من نحن",
+        aboutText:
+          "RDx Ventures هي شركة مقرها دبي متخصصة في بناء العقارات والعمليات وتكامل التكنولوجيا. يستفيد فريقنا الخبير من هندسة البرمجيات المتقدمة لتقديم حلول مبتكرة ومستدامة وفعالة.",
+        servicesTitle: "خدماتنا",
+        service1Title: "تطوير العقارات",
+        service1Desc: "من التخطيط إلى التنفيذ، ندير مشاريع عقارية واسعة النطاق بدقة وكفاءة.",
+        service2Title: "حلول هندسية",
+        service2Desc: "خدمات هندسية مدفوعة بالتكنولوجيا لتOptimizing البناء والعمليات.",
+        service3Title: "تكامل البرمجيات",
+        service3Desc: "تكامل سلس لمنصات البرمجيات لتحسين سير العمل وإدارة البيانات.",
+        portfolioTitle: "أبرز المشاريع",
+        proj1Title: "برج وسط المدينة دبي",
+        proj1Desc: "برج سكني عالي الارتفاع يجمع بين الفخامة والتقنيات الصديقة للبيئة.",
+        proj2Title: "أتمتة المباني الذكية",
+        proj2Desc: "أنظمة أتمتة متكاملة لإدارة المباني وكفاءة الطاقة.",
+        mapTitle: "مكاتبنا العالمية",
+        contactTitle: "اتصل بنا",
+        sendBtn: "إرسال الرسالة"
+      },
+      tr: {
+        navAbout: "Hakkımızda",
+        navServices: "Hizmetler",
+        navPortfolio: "Portföy",
+        navContact: "İletişim",
+        heroTitle: "Dubai ve Ötesinde Gayrimenkul ve Mühendislikte Yenilik",
+        heroSubtitle: "Teknoloji, hassasiyet ve tutkuyla vizyonunuzu inşa ediyoruz.",
+        aboutTitle: "Hakkımızda",
+        aboutText:
+          "RDx Ventures, gayrimenkul inşaatı, operasyonları ve teknoloji entegrasyonunda uzmanlaşmış Dubai merkezli bir şirkettir. Uzman ekibimiz, yenilikçi, sürdürülebilir ve verimli çözümler sunmak için ileri yazılım mühendisliğinden yararlanır.",
+        servicesTitle: "Hizmetlerimiz",
+        service1Title: "Gayrimenkul Geliştirme",
+        service1Desc: "Planlamadan uygulamaya kadar büyük ölçekli gayrimenkul projelerini hassasiyetle yönetiyoruz.",
+        service2Title: "Mühendislik Çözümleri",
+        service2Desc: "İnşaat ve operasyonları optimize etmek için teknoloji odaklı mühendislik hizmetleri.",
+        service3Title: "Yazılım Entegrasyonu",
+        service3Desc: "İş akışını ve veri yönetimini iyileştirmek için yazılım platformlarının sorunsuz entegrasyonu.",
+        portfolioTitle: "Portföy Öne Çıkanları",
+        proj1Title: "Downtown Dubai Kulesi",
+        proj1Desc: "Lüks yaşamı çevre dostu teknolojilerle birleştiren yüksek katlı konut kulesi.",
+        proj2Title: "Akıllı Bina Otomasyonu",
+        proj2Desc: "Verimli bina yönetimi ve enerji tasarrufu için entegre otomasyon sistemleri.",
+        mapTitle: "Küresel Ofislerimiz",
+        contactTitle: "İletişim",
+        sendBtn: "Mesaj Gönder"
+      },
+      ko: {
+        navAbout: "소개",
+        navServices: "서비스",
+        navPortfolio: "포트폴리오",
+        navContact: "연락처",
+        heroTitle: "두바이와 그 너머의 부동산 및 엔지니어링 혁신",
+        heroSubtitle: "기술, 정밀함, 열정으로 비전을 구현합니다.",
+        aboutTitle: "소개",
+        aboutText:
+          "RDx Ventures는 부동산 건설, 운영 및 기술 통합에 전문성을 가진 두바이 기반 회사입니다. 우리의 전문가 팀은 혁신적이고 지속 가능하며 효율적인 솔루션을 제공하기 위해 첨단 소프트웨어 엔지니어링을 활용합니다.",
+        servicesTitle: "서비스",
+        service1Title: "부동산 개발",
+        service1Desc: "계획부터 실행까지 대규모 부동산 프로젝트를 정밀하고 효율적으로 관리합니다.",
+        service2Title: "엔지니어링 솔루션",
+        service2Desc: "건설 및 운영 최적화를 위한 맞춤형 기술 기반 엔지니어링 서비스.",
+        service3Title: "소프트웨어 통합",
+        service3Desc: "워크플로우 및 데이터 관리를 개선하기 위한 원활한 소프트웨어 플랫폼 통합.",
+        portfolioTitle: "포트폴리오 하이라이트",
+        proj1Title: "다운타운 두바이 타워",
+        proj1Desc: "친환경 기술과 결합된 고급 주거용 고층 타워.",
+        proj2Title: "스마트 빌딩 자동화",
+        proj2Desc: "효율적인 빌딩 관리 및 에너지 절약을 위한 통합 자동화 시스템.",
+        mapTitle: "전 세계 사무소",
+        contactTitle: "문의하기",
+        sendBtn: "메시지 보내기"
+      }
+    };
+
+    // Function to update text content based on selected language
+    function updateLanguage(lang) {
+      document.documentElement.lang = lang;
+      if (lang === 'ar') {
+        document.documentElement.dir = 'rtl';
+      } else {
+        document.documentElement.dir = 'ltr';
+      }
+      const elements = document.querySelectorAll('[data-i18n]');
+      elements.forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+          el.textContent = translations[lang][key];
+        }
+      });
+    }
+
+    // Language selector event
+    const langSelect = document.getElementById('language-select');
+    langSelect.addEventListener('change', e => {
+      updateLanguage(e.target.value);
+      // Save preference
+      localStorage.setItem('rdx-lang', e.target.value);
+    });
+
+    // Load saved language or default
+    const savedLang = localStorage.getItem('rdx-lang') || 'en';
+    langSelect.value = savedLang;
+    updateLanguage(savedLang);
+
+    // Dark mode toggle
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    darkModeToggle.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark-mode');
+      darkModeToggle.setAttribute('aria-pressed', isDark);
+      darkModeToggle.querySelector('i').classList.toggle('fa-moon');
+      darkModeToggle.querySelector('i').classList.toggle('fa-sun');
+      // Save preference
+      localStorage.setItem('rdx-dark-mode', isDark);
+    });
+
+    // Load dark mode preference
+    const savedDarkMode = localStorage.getItem('rdx-dark-mode') === 'true';
+    if (savedDarkMode) {
+      document.documentElement.classList.add('dark-mode');
+      darkModeToggle.setAttribute('aria-pressed', true);
+      darkModeToggle.querySelector('i').classList.remove('fa-moon');
+      darkModeToggle.querySelector('i').classList.add('fa-sun');
+    }
+
+    // Initialize map (using Leaflet.js)
+    const map = L.map('map').setView([25.276987, 55.296249], 5); // Dubai coordinates
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Office locations with coordinates and popup info
+    const offices = [
+      { name: "Dubai HQ", coords: [25.276987, 55.296249], info: "RDx Ventures Dubai Headquarters" },
+      { name: "Istanbul Office", coords: [41.008238, 28.978359], info: "RDx Ventures Istanbul Office" },
+      { name: "Seoul Office", coords: [37.566536, 126.977966], info: "RDx Ventures Seoul Office" }
+    ];
+
+    offices.forEach(office => {
+      L.marker(office.coords).addTo(map).bindPopup(`<b>${office.name}</b><br>${office.info}`);
+    });
+
+    // Contact form submission handler (mock)
+    const contactForm = document.getElementById('contact-form');
+    contactForm.addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Thank you for contacting RDx Ventures! We will get back to you soon.');
+      contactForm.reset();
+    });
+  </script>
 </body>
 </html>
