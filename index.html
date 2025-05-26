@@ -2,375 +2,264 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>RDx Ventures | Dubai Real Estate & Engineering</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RDx Ventures - Real Estate & Software Engineering</title>
 
-  <!-- Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
-  <!-- Leaflet CSS for Map -->
   <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-    integrity="sha256-sA+UqnfvP0ij5xt+3o7uNU2N5G2IzjXSf6t4qcg3y60="
+    integrity="sha256-sA+zdEySmMPrF3G3rZLFG0C4nKw2F0hLqx4ytbA6AAw="
     crossorigin=""
   />
-
   <style>
-    /* Base styles */
+    /* Base & Dark mode */
     body {
       margin: 0;
-      font-family: 'Open Sans', sans-serif;
-      color: #002B45;
-      background-color: #ffffff;
-      scroll-behavior: smooth;
-      transition: background-color 0.4s, color 0.4s;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: #fff;
+      color: #222;
+      line-height: 1.6;
+      transition: background-color 0.3s, color 0.3s;
     }
-
-    header {
-      background-color: #005792;
-      color: white;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      flex-wrap: wrap;
+    body.dark {
+      background: #121212;
+      color: #eee;
     }
-
-    header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      margin: 0.5rem 0;
+    header,
+    footer {
+      background: #003366;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+    }
+    body.dark header,
+    body.dark footer {
+      background: #001f3f;
     }
 
     nav {
       display: flex;
+      justify-content: center;
+      gap: 1.5rem;
       flex-wrap: wrap;
-      gap: 1rem;
+      margin-bottom: 1rem;
     }
-
     nav a {
-      color: white;
+      color: #fff;
       text-decoration: none;
       font-weight: 600;
-      transition: color 0.3s ease;
-      padding: 0.5rem 0.75rem;
-      border-radius: 4px;
+      font-size: 1.1rem;
+      transition: color 0.3s;
     }
-
     nav a:hover,
     nav a:focus {
-      color: #CBA135;
-      outline: none;
-      background-color: rgba(203, 161, 53, 0.15);
-    }
-
-    /* Language selector */
-    .lang-select {
-      background-color: #CBA135;
-      color: #002B45;
-      border: none;
-      padding: 0.4rem 0.75rem;
-      font-weight: 600;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .lang-select:hover,
-    .lang-select:focus {
-      background-color: #a07f2d;
+      color: #ffa500;
       outline: none;
     }
 
-    /* Dark mode toggle button */
-    #darkModeToggle {
-      background-color: transparent;
-      border: 2px solid #fff;
-      color: #fff;
-      padding: 0.3rem 0.8rem;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-
-    #darkModeToggle:hover,
-    #darkModeToggle:focus {
-      background-color: #CBA135;
-      border-color: #CBA135;
-      color: #002B45;
-      outline: none;
-    }
-
-    /* Hero section with background image */
-    .hero {
-      background: linear-gradient(rgba(0, 40, 60, 0.6), rgba(0, 40, 60, 0.6)),
-        url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&q=80')
-        no-repeat center center/cover;
-      height: 60vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      text-align: center;
-      padding: 0 2rem;
-      animation: fadeIn 2s ease-in-out;
-      text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-    }
-
-    .hero h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      background-color: rgba(0, 40, 60, 0.6);
-      padding: 1rem 2rem;
-      border-radius: 12px;
-      animation: slideIn 1s ease-out;
-      margin: 0;
-    }
-
-    .hero p {
-      margin-top: 1rem;
-      font-size: 1.2rem;
-      background-color: rgba(203, 161, 53, 0.8);
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      animation: slideUp 1.5s ease-out;
-      margin-bottom: 0;
-    }
-
-    section {
-      padding: 4rem 2rem;
+    .container {
       max-width: 1200px;
       margin: 0 auto;
+      padding: 0 1rem 2rem;
     }
 
-    h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      color: #005792;
+    main {
+      padding-bottom: 2rem;
     }
 
-    /* Services */
-    .services {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
+    h1,
+    h2,
+    h3,
+    h4 {
+      margin-top: 0;
     }
 
-    .service {
-      background-color: #f2f7fb;
-      padding: 2rem;
-      border-left: 5px solid #CBA135;
-      border-radius: 12px;
+    /* Hero */
+    #hero {
+      background: url("https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1600&q=80")
+        center/cover no-repeat;
+      color: #fff;
+      text-align: center;
+      padding: 5rem 1rem 6rem;
       position: relative;
-      overflow: hidden;
-      transition: transform 0.3s;
     }
-
-    .service:hover,
-    .service:focus-within {
-      transform: translateY(-10px);
+    #hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      z-index: 0;
+    }
+    #hero > * {
+      position: relative;
+      z-index: 1;
+    }
+    #hero button {
+      background: #ffa500;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-top: 1rem;
+      transition: background-color 0.3s;
+    }
+    #hero button:hover,
+    #hero button:focus {
+      background: #cc8400;
       outline: none;
     }
 
-    .service i {
-      font-size: 2rem;
-      color: #CBA135;
-      margin-bottom: 1rem;
-      display: block;
+    /* Sections */
+    section {
+      margin: 3rem 0;
     }
 
-    /* Portfolio */
-    .portfolio {
+    /* Services & Portfolio Grid */
+    #services,
+    #portfolio {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-      margin-top: 2rem;
+      gap: 1.5rem;
     }
-
+    .service,
     .project {
-      background-color: #f9fbfd;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-      transition: transform 0.3s ease;
+      background: #f9f9f9;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 2px 5px rgb(0 0 0 / 0.1);
+      transition: box-shadow 0.3s;
     }
-
+    body.dark .service,
+    body.dark .project {
+      background: #1e1e1e;
+      box-shadow: 0 2px 8px rgba(255 255 255 / 0.1);
+    }
+    .service:hover,
     .project:hover,
+    .service:focus-within,
     .project:focus-within {
-      transform: scale(1.03);
+      box-shadow: 0 4px 10px #ffa500;
       outline: none;
     }
-
+    .service h4,
+    .project h4 {
+      margin-bottom: 0.5rem;
+    }
     .project img {
       width: 100%;
-      height: 300px;
+      height: 200px;
       object-fit: cover;
-      display: block;
-      border-radius: 8px 8px 0 0;
+      border-radius: 6px;
+      margin-bottom: 0.5rem;
+    }
+    .project.focused {
+      outline: 3px solid #ffa500;
     }
 
-    .project .desc {
-      padding: 1rem;
-    }
-
-    .project .desc h4 {
-      margin: 0 0 0.5rem;
-      color: #005792;
-      font-size: 1.2rem;
-    }
-
-    .project .desc p {
-      font-size: 0.95rem;
-      color: #444;
-    }
-
-    /* Contact button */
-    .contact-btn {
-      display: inline-block;
+    /* Map */
+    #map-section {
       margin-top: 2rem;
-      padding: 0.75rem 1.5rem;
-      background-color: #005792;
-      color: white;
-      font-weight: bold;
-      border: none;
+    }
+    #map {
+      height: 300px;
       border-radius: 8px;
-      text-decoration: none;
-      transition: background-color 0.3s ease;
-      cursor: pointer;
+      box-shadow: 0 2px 6px rgb(0 0 0 / 0.15);
     }
 
+    /* Contact */
+    #contact p {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+    .contact-btn {
+      background: #003366;
+      color: white;
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 5px;
+      font-weight: 600;
+      display: inline-block;
+      transition: background-color 0.3s;
+    }
     .contact-btn:hover,
     .contact-btn:focus {
-      background-color: #CBA135;
-      color: #002B45;
+      background: #001f3f;
       outline: none;
     }
-
-    /* Flags in text */
-    .flag {
-      width: 24px;
-      height: auto;
-      margin-left: 8px;
-      vertical-align: middle;
-    }
-
-    /* Footer */
-    footer {
-      background-color: #002B45;
-      color: white;
-      text-align: center;
-      padding: 2rem 1rem;
-      margin-top: 4rem;
-      font-size: 0.9rem;
-    }
-
-    /* Animations */
-    @keyframes fadeIn {
-      0% { opacity: 0; }
-      100% { opacity: 1; }
-    }
-    @keyframes slideIn {
-      0% { transform: translateX(-50px); opacity: 0; }
-      100% { transform: translateX(0); opacity: 1; }
-    }
-    @keyframes slideUp {
-      0% { transform: translateY(50px); opacity: 0; }
-      100% { transform: translateY(0); opacity: 1; }
-    }
-
-    /* Responsive typography */
-    @media (max-width: 768px) {
-      .hero h2 {
-        font-size: 2.2rem;
-      }
-      .hero p {
-        font-size: 1rem;
-      }
-      header h1 {
-        font-size: 1.5rem;
-      }
-    }
-
-    /* Responsive layout for nav and header */
-    @media (max-width: 500px) {
-      nav {
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-      header {
-        justify-content: center;
-      }
-    }
-
-    /* Dark Mode */
-    body.dark {
-      background-color: #121212;
-      color: #ddd;
-    }
-    body.dark header {
-      background-color: #1f1f1f;
-      color: #f0c85f;
-      box-shadow: none;
-    }
-    body.dark nav a {
-      color: #f0c85f;
-    }
-    body.dark nav a:hover,
-    body.dark nav a:focus {
-      color: #ffe082;
-      background-color: rgba(255, 224, 130, 0.15);
-    }
-    body.dark .hero {
-      background: linear-gradient(rgba(10, 20, 30, 0.8), rgba(10, 20, 30, 0.8)),
-        url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&q=80')
-        no-repeat center center/cover;
-      color: #f0c85f;
-      text-shadow: 0 0 15px rgba(255, 224, 130, 0.9);
-    }
-    body.dark .hero p {
-      background-color: rgba(255, 224, 130, 0.9);
-      color: #121212;
-    }
-    body.dark .services .service {
-      background-color: #1a1a1a;
-      border-left-color: #f0c85f;
-      color: #ddd;
-    }
-    body.dark .portfolio .project {
-      background-color: #1a1a1a;
-      box-shadow: none;
-      color: #ddd;
-    }
     body.dark .contact-btn {
-      background-color: #f0c85f;
-      color: #121212;
+      background: #ffa500;
+      color: #000;
     }
     body.dark .contact-btn:hover,
     body.dark .contact-btn:focus {
-      background-color: #fff3b0;
+      background: #cc8400;
       color: #000;
     }
-    body.dark footer {
-      background-color: #121212;
-      color: #bbb;
+
+    /* Language and Dark Mode Toggles Container */
+    #toggles {
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      padding: 0 1rem;
+    }
+    select,
+    button#darkModeToggle {
+      font-size: 1rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button#darkModeToggle {
+      background: #003366;
+      color: #fff;
+      border: none;
+    }
+    button#darkModeToggle:hover,
+    button#darkModeToggle:focus {
+      background: #001f3f;
+      outline: none;
+    }
+    body.dark button#darkModeToggle {
+      background: #ffa500;
+      color: #000;
+    }
+    body.dark button#darkModeToggle:hover,
+    body.dark button#darkModeToggle:focus {
+      background: #cc8400;
+      color: #000;
     }
 
-    /* Map container */
-    #map {
-      height: 400px;
-      width: 100%;
-      border-radius: 12px;
-      margin-top: 2rem;
-      box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    /* Responsive Adjustments */
+    @media (max-width: 600px) {
+      nav {
+        gap: 0.8rem;
+        font-size: 0.9rem;
+      }
+      #hero {
+        padding: 3rem 1rem 4rem;
+      }
+      #hero h1 {
+        font-size: 1.8rem;
+      }
+      #hero p {
+        font-size: 1.1rem;
+      }
+      #hero button {
+        font-size: 1rem;
+        padding: 0.75rem 1.5rem;
+      }
+      .project img {
+        height: 150px;
+      }
+      #map {
+        height: 250px;
+      }
     }
   </style>
 </head>
@@ -383,269 +272,126 @@
       <a href="#portfolio" data-key="navPortfolio">Portfolio</a>
       <a href="#contact" data-key="navContact">Contact</a>
     </nav>
-    <select aria-label="Select language" id="languageSwitcher" class="lang-select" title="Select Language">
-      <option value="en" selected>English</option>
+  </header>
+
+  <div id="toggles" aria-label="Language and display mode controls">
+    <label for="languageSwitcher" class="sr-only">Select Language</label>
+    <select id="languageSwitcher" aria-live="polite" aria-label="Language selection">
+      <option value="en">English</option>
       <option value="ar">العربية</option>
       <option value="tr">Türkçe</option>
       <option value="ko">한국어</option>
     </select>
-    <button id="darkModeToggle" aria-pressed="false" aria-label="Toggle Dark Mode">Dark Mode</button>
-  </header>
 
-  <div class="hero">
-    <h2 data-key="heroTitle">Elevating Dubai's Skyline</h2>
-    <p data-key="heroSubtitle">Engineering meets elegance in modern real estate</p>
-    <a href="#contact" class="contact-btn" data-key="heroButton">Get in Touch</a>
+    <button id="darkModeToggle" aria-pressed="false" aria-label="Toggle dark mode">
+      Dark Mode
+    </button>
   </div>
 
-  <section id="about">
-    <h3 data-key="aboutTitle">About RDx Ventures</h3>
-    <p data-key="aboutText">
-      Based in Dubai, RDx Ventures redefines real estate by fusing high-end construction with the precision of software engineering.
-      Our mission is to build iconic spaces with smart technologies and timeless design. We proudly operate in key global locations including 
-      <strong>Dubai <img class="flag" src="https://flagcdn.com/w40/ae.png" alt="UAE flag" />, Turkey <img class="flag" src="https://flagcdn.com/w40/tr.png" alt="Turkey flag" />, South Korea <img class="flag" src="https://flagcdn.com/w40/kr.png" alt="South Korea flag" /></strong>.
-    </p>
-  </section>
+  <main class="container">
+    <section id="hero" role="banner" aria-label="Hero section">
+      <h1 data-key="heroTitle">Elevating Dubai's Skyline</h1>
+      <p data-key="heroSubtitle">Engineering meets elegance in modern real estate</p>
+      <button aria-label="Get in touch" data-key="heroButton">Get in Touch</button>
+    </section>
 
-  <section id="services">
-    <h3 data-key="servicesTitle">Our Services</h3>
-    <div class="services">
-      <article class="service" tabindex="0" aria-label="Construction Management">
-        <i class="fa-solid fa-building"></i>
+    <section id="about" tabindex="-1" aria-labelledby="aboutTitle">
+      <h2 id="aboutTitle" data-key="aboutTitle">About RDx Ventures</h2>
+      <p data-key="aboutText">
+        Based in Dubai, RDx Ventures redefines real estate by fusing high-end construction with the precision of software engineering. Our mission is to build iconic spaces with smart technologies and timeless design. We proudly operate in key global locations including Dubai, Turkey, South Korea.
+      </p>
+    </section>
+
+    <section id="services" tabindex="-1" aria-labelledby="servicesTitle">
+      <h2 id="servicesTitle" data-key="servicesTitle">Our Services</h2>
+      <article class="service" tabindex="0">
         <h4 data-key="service1Title">Construction Management</h4>
         <p data-key="service1Desc">Delivering large-scale projects with unmatched quality and timelines.</p>
       </article>
-      <article class="service" tabindex="0" aria-label="Software Solutions">
-        <i class="fa-solid fa-code"></i>
+      <article class="service" tabindex="0">
         <h4 data-key="service2Title">Software Solutions</h4>
         <p data-key="service2Desc">Custom engineering software tailored to streamline your operations.</p>
       </article>
-      <article class="service" tabindex="0" aria-label="Sustainability Consulting">
-        <i class="fa-solid fa-leaf"></i>
+      <article class="service" tabindex="0">
         <h4 data-key="service3Title">Sustainability Consulting</h4>
         <p data-key="service3Desc">Eco-friendly designs to reduce carbon footprint and costs.</p>
       </article>
-    </div>
-  </section>
+    </section>
 
-  <section id="portfolio">
-    <h3 data-key="portfolioTitle">Portfolio Highlights</h3>
-    <div class="portfolio" role="list">
-      <article class="project" role="listitem" tabindex="0" aria-label="Skyline Tower project image and description">
-        <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=600&q=80" alt="Skyline Tower, Dubai" loading="lazy" />
-        <div class="desc">
-          <h4 data-key="project1Title">Skyline Tower</h4>
-          <p data-key="project1Desc">Iconic skyscraper in downtown Dubai blending modern aesthetics and cutting-edge tech.</p>
-        </div>
-      </article>
-      <article class="project" role="listitem" tabindex="0" aria-label="Marina Bay Residences project image and description">
-        <img src="https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=600&q=80" alt="Marina Bay Residences" loading="lazy" />
-        <div class="desc">
-          <h4 data-key="project2Title">Marina Bay Residences</h4>
-          <p data-key="project2Desc">Luxury waterfront apartments offering unparalleled views and amenities.</p>
-        </div>
-      </article>
-      <article class="project" role="listitem" tabindex="0" aria-label="Modern Commercial Complex project image and description">
-        <img src="https://images.unsplash.com/photo-1468071174046-657d9d351a40?auto=format&fit=crop&w=600&q=80" alt="Modern Commercial Complex" loading="lazy" />
-        <div class="desc">
-          <h4 data-key="project3Title">Modern Commercial Complex</h4>
-          <p data-key="project3Desc">State-of-the-art commercial space with sustainable design principles.</p>
-        </div>
-      </article>
-    </div>
-  </section>
+    <section id="portfolio" tabindex="-1" aria-labelledby="portfolioTitle">
+      <h2 id="portfolioTitle" data-key="portfolioTitle">Portfolio Highlights</h2>
+      <div role="list" aria-label="Portfolio projects" style="display:grid; gap:1rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+        <article
+          class="project"
+          role="listitem"
+          tabindex="0"
+          aria-label="Skyline Tower project image and description"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1560185127-0f9e22db4f66?auto=format&fit=crop&w=600&q=80"
+            alt="Skyline Tower, iconic skyscraper in Dubai"
+            loading="lazy"
+            width="600"
+            height="400"
+          />
+          <div class="desc">
+            <h4 data-key="project1Title">Skyline Tower</h4>
+            <p data-key="project1Desc">Iconic skyscraper in downtown Dubai blending modern aesthetics and cutting-edge tech.</p>
+          </div>
+        </article>
+        <article
+          class="project"
+          role="listitem"
+          tabindex="0"
+          aria-label="Marina Bay Residences project image and description"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80"
+            alt="Luxury waterfront apartment building at sunset"
+            loading="lazy"
+            width="600"
+            height="400"
+          />
+          <div class="desc">
+            <h4 data-key="project2Title">Marina Bay Residences</h4>
+            <p data-key="project2Desc">Luxury waterfront apartments offering unparalleled views and amenities.</p>
+          </div>
+        </article>
+        <article
+          class="project"
+          role="listitem"
+          tabindex="0"
+          aria-label="Modern Commercial Complex project image and description"
+        >
+          <img
+            src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=600&q=80"
+            alt="Modern commercial building with glass exterior"
+            loading="lazy"
+            width="600"
+            height="400"
+          />
+          <div class="desc">
+            <h4 data-key="project3Title">Modern Commercial Complex</h4>
+            <p data-key="project3Desc">State-of-the-art commercial space built with sustainable design principles.</p>
+          </div>
+        </article>
+      </div>
+    </section>
 
-  <section id="mapSection">
-    <h3 data-key="mapTitle">Our Office Locations</h3>
-    <div id="map" aria-label="Map showing RDx Ventures office locations"></div>
-  </section>
+    <section id="map-section" tabindex="-1" aria-labelledby="mapTitle">
+      <h3 id="mapTitle" data-key="mapTitle">Office Locations</h3>
+      <div id="map" role="region" aria-label="Map showing office locations"></div>
+    </section>
 
-  <section id="contact">
-    <h3 data-key="contactTitle">Contact Us</h3>
-    <p data-key="contactText">Ready to transform your vision into reality? Reach out today.</p>
-    <a href="mailto:contact@rdxventures.com" class="contact-btn" aria-label="Email RDx Ventures">contact@rdxventures.com</a>
-  </section>
+    <section id="contact" tabindex="-1" aria-label="Contact section">
+      <h3 data-key="contactTitle">Contact Us</h3>
+      <p data-key="contactText">Ready to turn your vision into reality? Get in touch today.</p>
+      <a href="mailto:contact@rdxventures.com" class="contact-btn" aria-label="Email RDx Ventures">Email Us</a>
+    </section>
+  </main>
 
   <footer>
-    <p>&copy; 2025 RDx Ventures. All rights reserved.</p>
-  </footer>
-
-  <!-- Leaflet JS for map -->
-  <script
-    src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-    integrity="sha256-nZ+WuM0Q8DZ1kaM3bWLUAAzFvZw7yjQaY5axkkx8w6o="
-    crossorigin=""
-  ></script>
-
-  <script>
-    // --- Dark Mode Toggle ---
-    const darkModeBtn = document.getElementById('darkModeToggle');
-    const body = document.body;
-
-    function setDarkMode(enabled) {
-      if (enabled) {
-        body.classList.add('dark');
-        darkModeBtn.setAttribute('aria-pressed', 'true');
-        darkModeBtn.textContent = 'Light Mode';
-        localStorage.setItem('darkMode', 'true');
-      } else {
-        body.classList.remove('dark');
-        darkModeBtn.setAttribute('aria-pressed', 'false');
-        darkModeBtn.textContent = 'Dark Mode';
-        localStorage.setItem('darkMode', 'false');
-      }
-    }
-
-    darkModeBtn.addEventListener('click', () => {
-      setDarkMode(!body.classList.contains('dark'));
-    });
-
-    // Initialize dark mode from saved preference
-    if (localStorage.getItem('darkMode') === 'true') {
-      setDarkMode(true);
-    }
-
-    // --- Multilingual Support ---
-    const languageSwitcher = document.getElementById('languageSwitcher');
-
-    // Translation dictionary for keys used in data-key attributes
-    const translations = {
-      en: {
-        navAbout: "About",
-        navServices: "Services",
-        navPortfolio: "Portfolio",
-        navContact: "Contact",
-        heroTitle: "Elevating Dubai's Skyline",
-        heroSubtitle: "Engineering meets elegance in modern real estate",
-        heroButton: "Get in Touch",
-        aboutTitle: "About RDx Ventures",
-        aboutText: "Based in Dubai, RDx Ventures redefines real estate by fusing high-end construction with the precision of software engineering. Our mission is to build iconic spaces with smart technologies and timeless design. We proudly operate in key global locations including Dubai, Turkey, South Korea.",
-        servicesTitle: "Our Services",
-        service1Title: "Construction Management",
-        service1Desc: "Delivering large-scale projects with unmatched quality and timelines.",
-        service2Title: "Software Solutions",
-        service2Desc: "Custom engineering software tailored to streamline your operations.",
-        service3Title: "Sustainability Consulting",
-        service3Desc: "Eco-friendly designs to reduce carbon footprint and costs.",
-        portfolioTitle: "Portfolio Highlights",
-        project1Title: "Skyline Tower",
-        project1Desc: "Iconic skyscraper in downtown Dubai blending modern aesthetics and cutting-edge tech.",
-        project2Title: "Marina Bay Residences",
-        project2Desc: "Luxury waterfront apartments offering unparalleled views and amenities.",
-        project3Title: "Modern Commercial Complex",
-        project3Desc: "State-of-the-art commercial space with sustainable design principles.",
-        mapTitle: "Our Office Locations",
-        contactTitle: "Contact Us",
-        contactText: "Ready to transform your vision into reality? Reach out today."
-      },
-      ar: {
-        navAbout: "من نحن",
-        navServices: "خدماتنا",
-        navPortfolio: "معرض الأعمال",
-        navContact: "اتصل بنا",
-        heroTitle: "نرتقي بأفق دبي",
-        heroSubtitle: "الهندسة تلتقي بالأناقة في العقارات الحديثة",
-        heroButton: "تواصل معنا",
-        aboutTitle: "عن RDx Ventures",
-        aboutText: "تعمل RDx Ventures في دبي على إعادة تعريف العقارات من خلال دمج البناء عالي الجودة مع دقة هندسة البرمجيات. مهمتنا بناء مساحات أيقونية بتقنيات ذكية وتصاميم خالدة. نعمل بفخر في مواقع عالمية رئيسية منها دبي، تركيا، كوريا الجنوبية.",
-        servicesTitle: "خدماتنا",
-        service1Title: "إدارة البناء",
-        service1Desc: "تقديم مشاريع ضخمة بجودة وجداول زمنية لا مثيل لها.",
-        service2Title: "حلول برمجية",
-        service2Desc: "برمجيات هندسية مخصصة لتبسيط عملياتك.",
-        service3Title: "استشارات الاستدامة",
-        service3Desc: "تصاميم صديقة للبيئة لتقليل البصمة الكربونية والتكاليف.",
-        portfolioTitle: "معرض الأعمال",
-        project1Title: "برج الأفق",
-        project1Desc: "ناطحة سحاب أيقونية في وسط دبي تجمع بين الجمال العصري والتقنية المتقدمة.",
-        project2Title: "شقق مارينا باي",
-        project2Desc: "شقق فاخرة على الواجهة البحرية مع إطلالات ومرافق لا تضاهى.",
-        project3Title: "مجمع تجاري حديث",
-        project3Desc: "مساحة تجارية متطورة بتصاميم مستدامة.",
-        mapTitle: "مواقع مكاتبنا",
-        contactTitle: "اتصل بنا",
-        contactText: "هل أنت مستعد لتحويل رؤيتك إلى حقيقة؟ تواصل معنا اليوم."
-      },
-      tr: {
-        navAbout: "Hakkımızda",
-        navServices: "Hizmetler",
-        navPortfolio: "Portföy",
-        navContact: "İletişim",
-        heroTitle: "Dubai'nin Silüetini Yükseltiyoruz",
-        heroSubtitle: "Mühendislik, modern gayrimenkulde zarafetle buluşuyor",
-        heroButton: "İletişime Geçin",
-        aboutTitle: "RDx Ventures Hakkında",
-        aboutText: "Dubai merkezli RDx Ventures, yüksek kaliteli inşaatı yazılım mühendisliği hassasiyetiyle birleştirerek gayrimenkulü yeniden tanımlıyor. Misyonumuz, akıllı teknolojiler ve zamansız tasarımlarla ikonik alanlar inşa etmek. Dubai, Türkiye, Güney Kore dahil önemli küresel lokasyonlarda faaliyet gösteriyoruz.",
-        servicesTitle: "Hizmetlerimiz",
-        service1Title: "İnşaat Yönetimi",
-        service1Desc: "Benzersiz kalite ve zaman çizelgeleri ile büyük ölçekli projeler teslim ediyoruz.",
-        service2Title: "Yazılım Çözümleri",
-        service2Desc: "Operasyonlarınızı kolaylaştırmak için özel mühendislik yazılımları.",
-        service3Title: "Sürdürülebilirlik Danışmanlığı",
-        service3Desc: "Karbon ayak izini ve maliyetleri azaltan çevre dostu tasarımlar.",
-        portfolioTitle: "Portföy Öne Çıkanlar",
-        project1Title: "Skyline Kulesi",
-        project1Desc: "Modern estetik ve ileri teknolojiyle Dubai şehir merkezinde ikonik gökdelen.",
-        project2Title: "Marina Bay Rezidansları",
-        project2Desc: "Eşsiz manzaralar ve olanaklar sunan lüks sahil daireleri.",
-        project3Title: "Modern Ticari Kompleks",
-        project3Desc: "Sürdürülebilir tasarım ilkeleriyle son teknoloji ticari alan.",
-        mapTitle: "Ofis Lokasyonlarımız",
-        contactTitle: "Bize Ulaşın",
-        contactText: "Vizyonunuzu gerçeğe dönüştürmeye hazır mısınız? Bugün iletişime geçin."
-      }
-    };
-
-    function translatePage(lang) {
-      document.querySelectorAll('[data-key]').forEach(el => {
-        const key = el.getAttribute('data-key');
-        if (translations[lang] && translations[lang][key]) {
-          el.textContent = translations[lang][key];
-        }
-      });
-      // Set dir for Arabic
-      document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
-    }
-
-    languageSwitcher.addEventListener('change', (e) => {
-      translatePage(e.target.value);
-      localStorage.setItem('preferredLanguage', e.target.value);
-    });
-
-    // Initialize language from saved preference or default to English
-    const savedLang = localStorage.getItem('preferredLanguage') || 'en';
-    languageSwitcher.value = savedLang;
-    translatePage(savedLang);
-
-    // --- Leaflet Map ---
-    const map = L.map('map').setView([25.276987, 55.296249], 5); // Dubai-centered
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution:
-        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-
-    const offices = [
-      { name: "Dubai Office", coords: [25.2048, 55.2708] },
-      { name: "Turkey Office", coords: [39.9334, 32.8597] },
-      { name: "South Korea Office", coords: [37.5665, 126.978] }
-    ];
-
-    offices.forEach(office => {
-      L.marker(office.coords).addTo(map).bindPopup(office.name);
-    });
-
-    // --- Responsiveness Check ---
-    function checkResponsiveness() {
-      const width = window.innerWidth;
-      if (width < 768) {
-        body.classList.add('mobile');
-      } else {
-        body.classList.remove('mobile');
-      }
-    }
-    window.addEventListener('resize', checkResponsiveness);
-    checkResponsiveness();
-
-  </script>
-</body>
-</html>
+    <p>© 2025 RDx Ventures. All rights reserved.</p>
+    <p style="font-size: 0.8rem; color: #aaa; margin-top: 0.5rem;">
+      <!-- CMS Integration Suggestions:
+      Consider integrating headless CMS solutions such as Strapi (https://strapi.io/) or Sanity (https://www.sanity.io/) for flexible content management and easy multilingual
